@@ -1,0 +1,10 @@
+before_script:
+  - docker info
+  - echo $DOCKER_PASSWORD | docker login -u $DOCKER_LOGIN --password-stdin
+
+build_image:
+  script:
+    - ./build $BUILD_OPTIONS
+
+after_script:
+  - docker logout

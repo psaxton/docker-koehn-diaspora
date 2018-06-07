@@ -45,7 +45,6 @@ ARG GEM_VERSION=2.6.14
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN su diaspora -c '/run_as_diaspora.sh'
-RUN chown -R diaspora:diaspora /home/diaspora
 
 # reduce image size by deleting files unnecessary at runtime
 RUN rm -rf /home/diaspora/diaspora/.git \ 
@@ -94,7 +93,7 @@ RUN apt-get update && \
 
 USER diaspora
 
-WORKDIR /home/diaspora/diaspora
+WORKDIR /home/diaspora
 
 CMD ./startup.sh
 

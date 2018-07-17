@@ -21,7 +21,7 @@ cd diaspora
 mkdir -p public/uploads/images
 
 gem update --system ${GEM_VERSION}
-gem install bundler
+gem install bundler -v 1.16.2
 bin/bundle config --local build.sigar '--with-cppflags="-fgnu89-inline"'
 gem uninstall sigar
 RAILS_ENV=production bin/bundle install --no-cache --deployment --without test development --with postgresql

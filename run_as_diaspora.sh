@@ -6,7 +6,7 @@ cd /home/diaspora
 
 umask 000
 
-curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+curl -sSL https://rvm.io/mpapis.asc | gpg --import --no-tty -
 
 curl -L https://s.diaspora.software/1t | bash
 

@@ -74,6 +74,7 @@ RUN apt-get update && \
         imagemagick \
         libyaml-0-2 \
         libgmp10 \
+        libjemalloc1 \
         libssl1.0.2 \
         libxml2 \ 
         libxslt1.1 \

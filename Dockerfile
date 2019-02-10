@@ -68,8 +68,10 @@ COPY --chown=diaspora:diaspora --from=build /home/diaspora /home/diaspora
 RUN mkdir -p /usr/share/man/man1 \
     && mkdir -p /usr/share/man/man7
 
+ARG SCANNER_TOKEN
+
 RUN apt-get update && \
-        apt-get install -y -qq \
+    apt-get install -yqq \
         postgresql-client \
         imagemagick \
         libyaml-0-2 \
@@ -90,6 +92,12 @@ RUN apt-get update && \
         gawk \
         procps \
         sqlite3 && \
+    if [ ! -z "$SCANNER_TOKEN" ] ; then \
+      curl https://get.aquasec.com/microscanner > /microscanner && \
+      chmod +x /microscanner && \
+      /microscanner --html "$SCANNER_TOKEN" > /microscanner.html ; \
+      rm -rf /microscanner ; \
+    fi ; \
     rm -rf /var/lib/apt/lists /tmp/* /var/tmp/* 
 
 USER diaspora

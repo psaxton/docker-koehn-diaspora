@@ -54,6 +54,9 @@ arguments:
 `--image-name`
 : The name of the image pushed. Defaults to `koehn/diaspora`.
 
+`--scanner-token`
+: See `SCANNER_TOKEN`, below.
+
 # Customizing your own image
 
 The Dockerfile accepts several build arguments to customize the build:
@@ -73,6 +76,11 @@ instructions.
 `GEM_VERSION`
 : The version of Gem to be installed. Defaults to `2.6.14` per the installation instructions. 
 
+`SCANNER_TOKEN`
+: You can scan the image for vulnerabilities with [MicroScanner](https://github.com/aquasecurity/microscanner).
+You'll need to generate your own token (see the link above for instructions). Scanning is disabled
+if no token is provided.
+
 These arguments allow you to use your own version of Diaspora and its tooling to make
 your own images. When building your image with `docker build`, simply specify the values
 you want with `--build-arg [argument]=[value]` e.g., 
@@ -83,3 +91,8 @@ you want with `--build-arg [argument]=[value]` e.g.,
 When a new version of Diaspora is released, I run this script twice. Once with the `--diaspora-version` 
 flag set to the current version number, and once without, to build `master` and tag `latest`. It's
 about that simple. 
+
+# Vulnerability scan
+Starting with 0.7.9.0, support was added for [MicroScanner](https://github.com/aquasecurity/microscanner), a
+tool that scans images for vulnerabilities. The official images include a report in `/microscanner.html`
+where you can see the vulnerabilities of the various components installed. 

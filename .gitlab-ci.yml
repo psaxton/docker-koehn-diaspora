@@ -1,10 +1,8 @@
-before_script:
-  - docker info
-  - echo $DOCKER_PASSWORD | docker login -u $DOCKER_LOGIN --password-stdin
-
-build_image:
+build:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
   script:
-    - ./build $BUILD_OPTIONS
-
-after_script:
-  - docker logout
+    - echo "{\"auths\":{\"docker.io\":{\"username\":\"$DOCKER_LOGIN\",\"password\":\"$DOCKER_PASSWORD\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination koehn/diaspora-test:latest

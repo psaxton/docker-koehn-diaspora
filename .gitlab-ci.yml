@@ -42,7 +42,7 @@ build_latest:
       }
     }
     EOF
-  - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination koehn/docker:latest --build-arg SCANNER_TOKEN=$SCANNER_TOKEN
+  - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination koehn/diaspora:latest --build-arg SCANNER_TOKEN=$SCANNER_TOKEN
   only: 
   - tags
 

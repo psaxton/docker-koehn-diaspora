@@ -157,8 +157,12 @@ if [[  $_arg_scanner_token ]] ; then BUILD_ARGS="$BUILD_ARGS --build-arg SCANNER
 
 BUILD_ARGS="$BUILD_ARGS --build-arg DIASPORA_DOCKER_GIT_COMMIT=`git log -1 --format=%h` "
 
-docker build --no-cache -t $IMAGE_NAME:$DOCKER_TAG $BUILD_ARGS $BUILD_OPTIONS .
+if [ -x /kaniko/executor ] ; then
+  /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $IMAGE_NAME:$DOCKER_TAG $BUILD_ARGS $BUILD_OPTIONS
+else
+  docker build --no-cache -t $IMAGE_NAME:$DOCKER_TAG $BUILD_ARGS $BUILD_OPTIONS .
 
-docker push $IMAGE_NAME:$DOCKER_TAG
+  docker push $IMAGE_NAME:$DOCKER_TAG
+fi
 
 # ] <-- needed because of Argbash

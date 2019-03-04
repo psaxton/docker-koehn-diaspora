@@ -5,7 +5,7 @@ build:
     entrypoint: [""]
   script:
   - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
-  - ./build --diaspora-version $CI_COMMIT_TAG
+  - $CI_PROJECT_DIR/build --diaspora-version $CI_COMMIT_TAG
   only: 
   - tags
 
@@ -16,7 +16,7 @@ build_latest:
     entrypoint: [""]
   script:
   - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
-  - ./build
+  - $CI_PROJECT_DIR/build
   only: 
   - tags
 

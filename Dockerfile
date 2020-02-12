@@ -48,6 +48,7 @@ RUN su diaspora -c '/run_as_diaspora.sh'
 
 # reduce image size by deleting files unnecessary at runtime
 RUN rm -rf /home/diaspora/diaspora/.git \ 
+           /home/diaspora/.gnupg \
            /home/diaspora/diaspora/vendor/bundle/ruby/**/cache && \
     find /home/diaspora/diaspora -name spec -exec rm -rf {} \+ 
 	
@@ -61,7 +62,6 @@ LABEL maintainer="Brad Koehn <brad@koe.hn>"
 LABEL diaspora_docker_git_commit=$DIASPORA_DOCKER_GIT_COMMIT
 
 RUN adduser --gecos "" --disabled-login --home /home/diaspora diaspora 
-
 COPY --chown=diaspora:diaspora --from=build /home/diaspora /home/diaspora
 
 # hack to make postgresql-client install work on slim

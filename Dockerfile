@@ -1,4 +1,4 @@
-FROM debian:stretch-slim as build
+FROM debian:buster-slim as build
 
 COPY run_as_diaspora.sh /run_as_diaspora.sh
 
@@ -54,7 +54,7 @@ RUN rm -rf /home/diaspora/diaspora/.git \
 	
 COPY startup.sh /home/diaspora/startup.sh
 
-FROM debian:stretch-slim
+FROM debian:buster-slim
 
 ARG DIASPORA_DOCKER_GIT_COMMIT=unspecified
 
@@ -72,19 +72,19 @@ ARG SCANNER_TOKEN
 
 RUN apt-get update && \
     apt-get install -yqq \
-        postgresql-client \
+    postgresql-client \
         imagemagick \
         libyaml-0-2 \
         libgmp10 \
-        libjemalloc1 \
-        libssl1.0.2 \
+        libjemalloc2 \
+        libssl1.1 \
         libxml2 \ 
         libxslt1.1 \
         libpq5 \ 
-        libmagickwand-6.q16-3 \
+        libmagickwand-6.q16-6 \
         libreadline7 \
         libsqlite3-0 \ 
-        libgdbm3 \ 
+        libgdbm6 \ 
         libncurses5 \
         ghostscript \
         curl \
@@ -97,7 +97,7 @@ RUN apt-get update && \
       chmod +x /microscanner && \
       /microscanner --html "$SCANNER_TOKEN" > /microscanner.html ; \
       rm -rf /microscanner ; \
-    fi ; \
+    fi && \
     rm -rf /var/lib/apt/lists /tmp/* /var/tmp/* 
 
 USER diaspora

@@ -64,15 +64,11 @@ LABEL diaspora_docker_git_commit=$DIASPORA_DOCKER_GIT_COMMIT
 RUN adduser --gecos "" --disabled-login --home /home/diaspora diaspora 
 COPY --chown=diaspora:diaspora --from=build /home/diaspora /home/diaspora
 
-# hack to make postgresql-client install work on slim
-RUN mkdir -p /usr/share/man/man1 \
-    && mkdir -p /usr/share/man/man7
-
 ARG SCANNER_TOKEN
 
 RUN apt-get update && \
-    apt-get install -yqq \
-    postgresql-client \
+    apt-get install -yqq --no-install-recommends \
+        postgresql-client \
         imagemagick \
         libyaml-0-2 \
         libgmp10 \

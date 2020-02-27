@@ -19,7 +19,7 @@ build:
     }
     EOF
   - cat /kaniko/.docker/config.json
-  - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination koehn/diaspora:$CI_COMMIT_TAG --build-arg GIT_BRANCH=$(echo $CI_COMMIT_TAG | awk -F '-' '{print $1}') --build-arg SCANNER_TOKEN=$SCANNER_TOKEN
+  - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination registry.gitlab.koehn.com/docker/diaspora:$CI_COMMIT_TAG --build-arg GIT_BRANCH=$(echo $CI_COMMIT_TAG | awk -F '-' '{print $1}') --build-arg SCANNER_TOKEN=$SCANNER_TOKEN
   only: 
   - tags
 
@@ -44,7 +44,7 @@ build_latest:
     }
     EOF
   - cat /kaniko/.docker/config.json
-  - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination koehn/diaspora:latest --build-arg SCANNER_TOKEN=$SCANNER_TOKEN
+  - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination registry.gitlab.koehn.com/docker/diaspora:latest --build-arg SCANNER_TOKEN=$SCANNER_TOKEN
   only: 
   - tags
 

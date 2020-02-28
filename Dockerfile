@@ -67,7 +67,7 @@ COPY --chown=diaspora:diaspora --from=build /home/diaspora /home/diaspora
 ARG SCANNER_TOKEN
 
 RUN apt-get update && \
-    apt-get install -yqq --no-install-recommends \
+    apt-get install -yqq \
         postgresql-client \
         imagemagick \
         libyaml-0-2 \
@@ -84,6 +84,7 @@ RUN apt-get update && \
         libncurses5 \
         ghostscript \
         curl \
+        ca-certificates \
         nodejs \
         gawk \
         procps \

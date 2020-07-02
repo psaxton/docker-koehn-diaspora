@@ -29,7 +29,7 @@ build:
 build_latest:
   stage: build
   image:
-    name: gcr.io/kaniko-project/executor:debug
+    name: gcr.io/kaniko-project/executor:debug-v0.16.0
     entrypoint: [""]
   script:
   - |

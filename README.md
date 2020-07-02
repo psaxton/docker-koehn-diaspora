@@ -70,8 +70,8 @@ the official Diaspora Git Repository (https://github.com/diaspora/diaspora.git)
 `master`
 
 `RUBY_VERSION`
-: The version of Ruby to be installed by RVM. Defaults to `2.4` per the installation
-instructions, and will install the latest version in the 2.4 series. 
+: The version of Ruby to be installed by RVM. Defaults to `2.6.1` per the installation
+instructions, and will install the latest version in the 2.6 series. 
 
 `GEM_VERSION`
 : The version of Gem to be installed. Defaults to `2.6.14` per the installation instructions. 

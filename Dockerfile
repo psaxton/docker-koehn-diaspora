@@ -95,7 +95,8 @@ RUN apt-get update && \
       /microscanner --html "$SCANNER_TOKEN" > /microscanner.html ; \
       rm -rf /microscanner ; \
     fi && \
-    rm -rf /var/lib/apt/lists /tmp/* /var/tmp/* 
+    apt-get clean && \
+    rm -rf /tmp/* /var/tmp/* 
 
 USER diaspora
 

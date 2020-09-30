@@ -1,10 +1,5 @@
-#!/bin/bash --login
+#!/bin/bash
 
-cd diaspora
-mkdir -p tmp/pids
-mkdir -p tmp/cache
+/usr/sbin/lighttpd -D -f /etc/lighttpd/lighttpd.conf &
 
-export RAILS_ENV=production 
-
-bin/rake db:migrate
-script/server
+su - diaspora /home/diaspora/start-diaspora.sh

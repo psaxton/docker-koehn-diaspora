@@ -52,7 +52,7 @@ RUN rm -rf /home/diaspora/diaspora/.git \
            /home/diaspora/diaspora/vendor/bundle/ruby/**/cache && \
     find /home/diaspora/diaspora -name spec -exec rm -rf {} \+ 
 	
-COPY startup.sh /home/diaspora/startup.sh
+COPY startup.sh start-diaspora.sh /home/diaspora/
 
 FROM debian:buster-slim
 
@@ -88,7 +88,8 @@ RUN apt-get update && \
         nodejs \
         gawk \
         procps \
-        sqlite3 && \
+        sqlite3 \
+        lighttpd && \
     if [ ! -z "$SCANNER_TOKEN" ] ; then \
       curl https://get.aquasec.com/microscanner > /microscanner && \
       chmod +x /microscanner && \
@@ -96,9 +97,8 @@ RUN apt-get update && \
       rm -rf /microscanner ; \
     fi && \
     apt-get clean && \
+    ln -s /home/diaspora/diaspora/public/assets /var/www/html/assets && \
     rm -rf /tmp/* /var/tmp/* 
-
-USER diaspora
 
 WORKDIR /home/diaspora
 

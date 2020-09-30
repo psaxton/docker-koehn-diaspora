@@ -52,7 +52,7 @@ RUN rm -rf /home/diaspora/diaspora/.git \
            /home/diaspora/diaspora/vendor/bundle/ruby/**/cache && \
     find /home/diaspora/diaspora -name spec -exec rm -rf {} \+ 
 	
-COPY startup.sh start-diaspora.sh /home/diaspora/
+COPY startup.sh /home/diaspora/startup.sh
 
 FROM debian:buster-slim
 
@@ -96,9 +96,9 @@ RUN apt-get update && \
       /microscanner --html "$SCANNER_TOKEN" > /microscanner.html ; \
       rm -rf /microscanner ; \
     fi && \
-    apt-get clean && \
-    ln -s /home/diaspora/diaspora/public/assets /var/www/html/assets && \
-    rm -rf /tmp/* /var/tmp/* 
+    rm -rf /var/lib/apt/lists /tmp/* /var/tmp/* 
+
+USER diaspora
 
 WORKDIR /home/diaspora
 

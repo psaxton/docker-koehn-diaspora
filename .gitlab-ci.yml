@@ -52,15 +52,11 @@ build_latest:
 
 deploy:
   stage: deploy
-  image:
-    name: koehn/alpine-ssh
+  image: bitnami/kubectl
   script:
-  - mkdir -p /root/.ssh
-  - chmod 700 /root/.ssh
-  - cat $TURNKEY_FP > /root/.ssh/known_hosts
-  - tr '>' '\n' < $SSH_PRIVATE_KEY > /root/.ssh/id_rsa
-  - cat $SSH_PUBLIC_KEY > /root/.ssh/id_rsa.pub
-  - chmod 600 /root/.ssh/known_hosts /root/.ssh/id_rsa /root/.ssh/id_rsa.pub
-  - ssh root@turnkey.koehn.com "cd /home/docker/docker-services/web/sites/diaspora && docker-compose pull && docker-compose up -d"
+    - kubectl rollout restart deployment -n diaspora diaspora
+  environment:
+    name: production
+    url: https://diaspora.koehn.com
   only:
   - tags

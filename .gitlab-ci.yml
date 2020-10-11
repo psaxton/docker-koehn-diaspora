@@ -55,6 +55,7 @@ deploy:
   image: bitnami/kubectl
   script:
     - kubectl rollout restart deployment -n diaspora diaspora
+    - kubectl rollout restart deployment -n diaspora assets
   environment:
     name: production
     url: https://diaspora.koehn.com

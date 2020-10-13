@@ -36,7 +36,7 @@ The next time you start your application you'll get the latest build, and the la
 of database migrations will be installed automatically.
 
 # Making and pushing your own image
-The `build` script included will (on *nix systems) build and push your image. You can run it with the following
+The `build` script included will (on \*nix systems) build and push your image. You can run it with the following
 arguments: 
 
 `--git-url url`

@@ -14,9 +14,10 @@ Once that's done, you can run the pod with `docker-compose up -d`. The data in t
 and user-uploaded images will be placed into Docker volumes; you'll want to back them up. 
 
 You'll also need to configure a web server like Nginx or Apache to provide TLS 
-termination. This can be added to the `docker-compose.yml` file or not, depending 
+termination. This can be added directly to the `nginx` container or proxied to it, depending 
 on your particular environment. The diaspora server will be available inside the compose
-environment at `http://diaspora:3000`. Some examples are available (on the wiki)[https://wiki.diasporafoundation.org/Installation/Debian/Jessie]
+environment at `http://diaspora:3000`. The `nginx` container will serve static and app content
+bound to port 8080 by default. Some examples are available (on the wiki)[https://wiki.diasporafoundation.org/Installation/Debian/Jessie]
 (look for the section labeled, "Reverse Proxy").
 
 # Upgrading
